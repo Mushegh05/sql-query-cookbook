@@ -37,7 +37,7 @@ SELECT
 | 2864 | Orientation | 1.99 |
 Business insight: This table shows the tracks which have made the most amount of revenue. The top 8 tracks made $3.98 revenue, and the other 2 made $1.99 revenue, but keeping in mind that a lot of tracks have a $1.99 unit price, those 2 are just 2 random tracks from hundreds of sold tracks, so those are not really in top 10.
 
-### 2. Top Revenue-Generating genres
+### 2. Top Revenue-Generating Genres
 **Question:** Which genres bring in the most total revenue, and what's the average track price per genre?
 
 ```sql
@@ -80,4 +80,47 @@ ORDER BY total_revenue DESC;
  |Rock And Roll      |          5.94 |                0.99|
 
  Business insigth: This table shows the revenues from sold tracks by genres. The most amount of revenue comes from Rock genre tracks. The top 4 genres by revenue are far beyond the others, but notice that all tracks from those genres are priced $0.99 on average, which is relatively low, so the amount of revenue has some negative correlation with the unit_price.
- 
+
+### 3. Top Revenue-Generating Countries
+
+**Question:** Which countries generate the most revenue, and how does average order size compare between them?
+
+```sql
+ SELECT 
+    billing_country AS country, 
+    SUM(total) AS revenue, 
+    ROUND(AVG(total), 2) AS average_order_size 
+FROM invoice 
+GROUP BY country 
+ORDER BY revenue DESC;
+ ```
+
+|country| revenue | average_order_size|
+|---|---|---|
+| USA | 523.06 | 5.75|
+| Canada | 303.96 | 5.43|
+| France | 195.10 | 5.57|
+| Brazil | 190.10 | 5.43|
+| Germany | 156.48 | 5.59|
+| United Kingdom | 112.86 | 5.37|
+| Czech Republic | 90.24 | 6.45|
+| Portugal | 77.24 | 5.52|
+| India | 75.26 | 5.79|
+| Chile | 46.62 | 6.66|
+| Ireland | 45.62 | 6.52|
+| Hungary | 45.62 | 6.52|
+| Austria | 42.62 | 6.09|
+| Finland | 41.62 | 5.95|
+| Netherlands | 40.62 | 5.80|
+| Norway | 39.62 | 5.66|
+| Sweden | 38.62 | 5.52|
+| Argentina | 37.62 | 5.37|
+| Belgium | 37.62 | 5.37|
+| Poland | 37.62 | 5.37|
+| Australia | 37.62 | 5.37|
+| Italy | 37.62 | 5.37|
+| Denmark | 37.62 | 5.37|
+| Spain | 37.62 | 5.37|
+
+Business insight: This table shows the countries by their total revenues and average order sizes. The most amount of revenue comes from USA. The average order sizes from all countries are close - from $5.37 to $6.66.
+
