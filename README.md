@@ -35,5 +35,43 @@ SELECT
 | 2868 | Walkabout | 3.98 |
 | 2900 | Exposé | 1.99 |
 | 2864 | Orientation | 1.99 |
-(10 rows)
 
+### 2. Top Revenue-Generating genres
+**Question:** Which genres bring in the most total revenue, and what's the average track price per genre?
+
+```sql
+SELECT 
+    genre.name, 
+    SUM(invoice_line.unit_price * invoice_line.quantity) AS total_revenue 
+FROM track 
+JOIN genre ON genre.genre_id = track.genre_id 
+JOIN invoice_line ON track.track_id = invoice_line.track_id 
+GROUP BY genre.genre_id, genre.name 
+ORDER BY total_revenue DESC;
+```
+name | total_revenue
+|---|---|
+ Rock               |        826.65
+ Latin              |        382.14
+ Metal              |        261.36
+ Alternative & Punk |        241.56
+ TV Shows           |         93.53
+ Jazz               |         79.20
+ Blues              |         60.39
+ Drama              |         57.71
+ R&B/Soul           |         40.59
+ Classical          |         40.59
+ Sci Fi & Fantasy   |         39.80
+ Reggae             |         29.70
+ Pop                |         27.72
+ Soundtrack         |         19.80
+ Comedy             |         17.91
+ Hip Hop/Rap        |         16.83
+ Bossa Nova         |         14.85
+ Alternative        |         13.86
+ World              |         12.87
+ Science Fiction    |         11.94
+ Heavy Metal        |         11.88
+ Electronica/Dance  |         11.88
+ Easy Listening     |          9.90
+ Rock And Roll      |          5.94
